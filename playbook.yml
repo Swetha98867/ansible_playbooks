@@ -1,0 +1,10 @@
+---
+  - name : test playbook
+    hosts : all
+    gather_facts : no
+    become: yes
+
+    tasks :
+        - name: test1
+          debug: 
+            msg: "hello from playbook"

@@ -1,0 +1,40 @@
+---
+ - name: linux commands
+   hosts: all
+   gather_facts: no
+
+   tasks:
+      - name: check disk_free
+        command : df -h
+        register: disk_free
+
+      - name: check uptime
+        command: uptime
+        register: uptime_data
+   
+      - name: check date
+        command: date
+        register: current_date
+    
+      - name: present working dir
+        command: pwd
+        register: present_working_dir
+
+     
+      - name: hostname
+        command: hostname -I
+        register: Ip_address
+       
+      - name: running_process
+        command: ps -ef
+        register: running_process
+
+      - name: Display all outputs
+        debug:
+         msg:
+           - "disk free: {{ disk_free.stdout_lines }}"
+           - "Uptime: {{ uptime_data.stdout_lines }}"
+           - "date: {{ current_date.stdout_lines }}"
+           - "PWD: {{ present_working_dir.stdout_lines }}"
+           - "Ip address: {{ Ip_address.stdout_lines }}"
+           - "Ps-ef: {{ running_process.stdout_lines }}"
