@@ -18,3 +18,5 @@
        - name: test2
          debug:
            msg: "{{ dept }}"
+       #  when: dept == "devops"
+         when: dept == "developer"
