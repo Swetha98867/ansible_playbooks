@@ -1,0 +1,42 @@
+---
+ - name: apt/yum and service module
+   hosts: all
+   gather_facts: no
+   become: true
+
+   tasks:
+
+      - name: install nginx
+        apt:
+          name: nginx
+          state: present
+
+      - name: upgrade app
+        apt:
+           name: upgrade nginx
+           state: latest
+
+      #- name: delete app
+      #  apt:
+      #    name: delete app
+      #    state: absent
+    
+     #SERVICE 
+      - name: start service nginx
+        service:
+           name: nginx
+           state: started
+
+      - name: restart service
+        service:
+          name: nginx
+          state: restarted
+     
+      - name: enable nginx
+        service:
+           name: nginx
+           enabled: yes
+
+
+
+
