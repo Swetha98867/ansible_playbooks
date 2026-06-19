@@ -1,0 +1,25 @@
+---
+ - name: user of variables within playbook and outside playbook
+   hosts: all
+   gather_facts: no
+
+   vars:
+     username: swetha
+     id_no: 2345
+
+   vars_files:
+       - varfile.yml
+
+
+   tasks:
+     - name: get username
+       debug:
+         msg: "username is {{ username }}"
+
+     - name: get id_no
+       debug:
+         msg: "Id no is {{ id_no }}"
+
+     - name: get dept
+       debug: 
+         msg: "Department is {{ dept }}"    

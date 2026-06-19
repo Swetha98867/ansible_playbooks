@@ -1,0 +1,20 @@
+---
+ - name: variable test
+   hosts: all
+   gather_facts: no
+
+   vars:
+      environment: dev
+ 
+   vars_files:
+       - varfile.yml
+
+
+   tasks:
+       - name: test1
+         debug:
+           msg: "{{ environment }}"
+
+       - name: test2
+         debug:
+           msg: "{{ dept }}"
