@@ -1,0 +1,23 @@
+---
+ - name: file module
+   hosts: all
+   gather_facts: no
+
+   tasks:
+       - name: create file
+         file: 
+           path: /tmp/file1
+           state: touch
+
+       - name: create directory
+         file: 
+            path: /tmp/directory1
+            state: directory
+            owner: azureuser
+            mode: 777
+
+       - name: delete file
+         file:
+             path: /tmp/text.txt
+             state: absent
+
