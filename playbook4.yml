@@ -1,0 +1,12 @@
+---
+- name: delete 50 files
+  hosts: webservers
+  gather_facts: no
+
+  tasks:
+
+    - name: remove files
+      file:
+        path: "/tmp/demo1/file{{ item }}.txt"
+        state: absent
+      loop: "{{ range(1,51) | list }}"

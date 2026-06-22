@@ -1,0 +1,27 @@
+---
+- name: move files in batches of 5
+  hosts: webservers
+  gather_facts: no
+
+  vars:
+    file_batches: "{{ range(1,51) | list | batch(5) }}"
+
+  tasks:
+
+    - name: create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /tmp/demo1
+        - /tmp/demo2
+
+    - name: create 50 files
+      file:
+        path: "/tmp/demo1/file{{ item }}.txt"
+        state: touch
+      loop: "{{ range(1,51) | list }}"
+
+    - name: move files batch-wise (5 at a time)
+      command: mv /tmp/demo1/file{{ item.0 }}.txt /tmp/demo2/
+      loop: "{{ file_batches }}"
