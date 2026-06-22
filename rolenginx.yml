@@ -1,0 +1,7 @@
+---
+ - name: call role
+   hosts: webservers
+   gather_facts: no
+ 
+   roles: 
+      - role/developer

@@ -1,0 +1,25 @@
+---
+- name: Playbook 3 Template + File + Copy + Fetch
+  # template welcome.j2 file created with jinja2 vars
+  hosts: all
+
+  vars:
+    username: Swetha
+
+  tasks:
+
+    - file:
+        path: /tmp/demo
+        state: directory
+
+    - template:
+        src: welcome.j2
+        dest: /tmp/demo/welcome.txt
+
+    - copy:
+        src: local.txt
+        dest: /tmp/demo/local.txt
+
+    - fetch:
+        src: /tmp/demo/welcome.txt
+        dest: /tmp/backup/

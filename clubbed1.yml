@@ -1,0 +1,24 @@
+---
+ - name: Playbook 1 Package Installation + Conditions + Handlers + Facts 
+   hosts: all
+   become: yes
+
+   tasks:
+
+    - name: Install package
+      package:
+        name: httpd
+        state: present
+      when: ansible_os_family == "RedHat"
+      notify: restart httpd
+
+    - name: Display OS
+      debug:
+        var: ansible_os_distribution
+
+   handlers:
+
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

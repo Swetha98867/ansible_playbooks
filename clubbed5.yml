@@ -1,0 +1,24 @@
+---
+- name: Playbook 5 Roles + Tags + Async + Delegate
+  hosts: all
+  serial: 2
+  strategy: free
+
+  roles:
+    - nginx
+
+  tasks:
+
+    - name: Long task
+      command: sleep 60
+      async: 120
+      poll: 0
+      tags: longtask
+
+    - name: Run once
+      command: hostname
+      run_once: true
+
+    - name: Execute on control node
+      command: date
+      delegate_to: localhost

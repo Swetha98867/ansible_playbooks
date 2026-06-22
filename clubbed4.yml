@@ -1,0 +1,24 @@
+---
+- name: Playbook 4 lineinfile + blockinfile + stat + assert
+  hosts: all
+  become: yes
+  tasks:
+
+    - stat:
+        path: /etc/hosts
+      register: hostfile
+
+    - assert:
+        that:
+          - hostfile.stat.exists
+
+    - lineinfile:
+        path: /etc/hosts
+        line: "10.0.0.10 appserver"
+
+    - blockinfile:
+        path: /tmp/app.conf
+        create: yes
+        block: |
+          DB_HOST=mysql
+          DB_PORT=3306
