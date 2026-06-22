@@ -1,0 +1,15 @@
+---
+ - name: template execution
+   hosts: all
+   gather_facts: no
+
+   vars:
+     username: swetha
+     company: Infosys
+
+   tasks:
+
+      - name: test1
+        template: 
+            src: varfile.j2
+            dest: /tmp/sample.txt
